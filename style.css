@@ -54,10 +54,23 @@ h1 {
     justify-content: center;
     font-size: 2rem;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .card:hover {
     border-color: #e94560;
+    background-color: #1a2744;
+}
+
+.card.flipped {
+    background-color: #0f3460;
+    border-color: #53d8fb;
+}
+
+.card.matched {
+    background-color: #1b4332;
+    border-color: #40916c;
+    cursor: default;
 }
 
 #restart-btn {
