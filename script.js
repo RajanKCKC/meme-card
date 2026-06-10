@@ -1,10 +1,10 @@
 const memes = [
-    { id: 'skibidi', emoji: '🚽' },
-    { id: 'sigma', emoji: '🐺' },
-    { id: 'rizz', emoji: '💫' },
-    { id: 'sussy', emoji: '📮' },
-    { id: 'doge', emoji: '🐕' },
-    { id: 'pepe', emoji: '🐸' },
+    { id: 'skibidi', emoji: '🚽', name: 'Skibidi' },
+    { id: 'sigma', emoji: '🐺', name: 'Sigma' },
+    { id: 'rizz', emoji: '💫', name: 'Rizz' },
+    { id: 'sussy', emoji: '📮', name: 'Sussy' },
+    { id: 'doge', emoji: '🐕', name: 'Doge' },
+    { id: 'pepe', emoji: '🐸', name: 'Pepe' },
 ];
 
 let cards = [];
@@ -24,8 +24,8 @@ function shuffle(array) {
 function createBoard() {
     const board = document.getElementById('game-board');
     board.innerHTML = '';
+    document.getElementById('win-message').classList.add('hidden');
 
-    // Create pairs
     cards = [];
     memes.forEach(meme => {
         cards.push({ ...meme });
@@ -34,29 +34,28 @@ function createBoard() {
     shuffle(cards);
 
     cards.forEach((card, index) => {
-        const cardEl = document.createElement('div');
-        cardEl.classList.add('card');
-        cardEl.dataset.index = index;
-        cardEl.textContent = '❓';
-        cardEl.addEventListener('click', () => flipCard(cardEl, index));
-        board.appendChild(cardEl);
+        const el = document.createElement('div');
+        el.classList.add('card');
+        el.dataset.index = index;
+        el.textContent = '❓';
+        el.addEventListener('click', () => flipCard(el, index));
+        board.appendChild(el);
     });
 
-    // Reset stats
     matchedPairs = 0;
     moves = 0;
     flippedCards = [];
     isLocked = false;
+    document.getElementById('status').textContent = 'Playing';
     updateStats();
 }
 
-function flipCard(cardEl, index) {
-    if (isLocked) return;
-    if (cardEl.classList.contains('flipped') || cardEl.classList.contains('matched')) return;
+function flipCard(el, index) {
+    if (isLocked || el.classList.contains('flipped') || el.classList.contains('matched')) return;
 
-    cardEl.classList.add('flipped');
-    cardEl.textContent = cards[index].emoji;
-    flippedCards.push({ element: cardEl, index: index });
+    el.classList.add('flipped');
+    el.textContent = cards[index].emoji;
+    flippedCards.push({ element: el, index });
 
     if (flippedCards.length === 2) {
         moves++;
@@ -67,25 +66,28 @@ function flipCard(cardEl, index) {
 
 function checkMatch() {
     isLocked = true;
-    const [card1, card2] = flippedCards;
+    const [c1, c2] = flippedCards;
 
-    if (cards[card1.index].id === cards[card2.index].id) {
-        card1.element.classList.add('matched');
-        card2.element.classList.add('matched');
+    if (cards[c1.index].id === cards[c2.index].id) {
+        c1.element.classList.add('matched');
+        c2.element.classList.add('matched');
         matchedPairs++;
         updateStats();
         flippedCards = [];
         isLocked = false;
 
         if (matchedPairs === memes.length) {
-            setTimeout(() => alert('🎉 You won in ' + moves + ' moves!'), 300);
+            document.getElementById('status').textContent = 'Won!';
+            document.getElementById('win-message').classList.remove('hidden');
+            document.getElementById('win-details').textContent = 
+                'Completed in ' + moves + ' moves!';
         }
     } else {
         setTimeout(() => {
-            card1.element.classList.remove('flipped');
-            card2.element.classList.remove('flipped');
-            card1.element.textContent = '❓';
-            card2.element.textContent = '❓';
+            c1.element.classList.remove('flipped');
+            c2.element.classList.remove('flipped');
+            c1.element.textContent = '❓';
+            c2.element.textContent = '❓';
             flippedCards = [];
             isLocked = false;
         }, 800);
@@ -93,10 +95,11 @@ function checkMatch() {
 }
 
 function updateStats() {
-    document.getElementById('moves').textContent = 'Moves: ' + moves;
-    document.getElementById('matches').textContent = 'Matches: ' + matchedPairs + ' / ' + memes.length;
+    document.getElementById('moves').textContent = moves;
+    document.getElementById('matches').textContent = matchedPairs + ' / ' + memes.length;
 }
 
 document.getElementById('restart-btn').addEventListener('click', createBoard);
+document.getElementById('play-again-btn').addEventListener('click', createBoard);
 
 createBoard();
