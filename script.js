@@ -79,7 +79,7 @@ function checkMatch() {
         if (matchedPairs === memes.length) {
             document.getElementById('status').textContent = 'Won!';
             document.getElementById('win-message').classList.remove('hidden');
-            document.getElementById('win-details').textContent = 
+            document.getElementById('win-details').textContent =
                 'Completed in ' + moves + ' moves!';
         }
     } else {
