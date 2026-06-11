@@ -15,9 +15,7 @@ body {
     min-height: 100vh;
 }
 
-#game-header {
-    margin-bottom: 25px;
-}
+#game-header { margin-bottom: 25px; }
 
 #game-title {
     font-size: 2.5rem;
@@ -27,15 +25,9 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 8px;
-    text-shadow: none;
 }
 
-.subtitle {
-    color: #8888aa;
-    font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: 1px;
-}
+.subtitle { color: #8888aa; font-size: 1rem; letter-spacing: 1px; }
 
 #stats-bar {
     display: flex;
@@ -51,13 +43,10 @@ body {
     border-radius: 12px;
     padding: 12px 24px;
     min-width: 110px;
-    transition: transform 0.2s, border-color 0.3s;
+    transition: transform 0.2s;
 }
 
-.stat-box:hover {
-    transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.2);
-}
+.stat-box:hover { transform: translateY(-2px); }
 
 .stat-label {
     display: block;
@@ -91,12 +80,21 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: 2.2rem;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    user-select: none;
+}
+
+.card .card-name {
+    font-size: 0.6rem;
+    color: #aaa;
+    margin-top: 2px;
+    display: none;
 }
 
 .card:hover {
@@ -111,6 +109,8 @@ body {
     box-shadow: 0 0 20px rgba(83, 216, 251, 0.2);
 }
 
+.card.flipped .card-name { display: block; }
+
 .card.matched {
     background: rgba(82, 183, 136, 0.15);
     border-color: rgba(82, 183, 136, 0.5);
@@ -119,9 +119,9 @@ body {
     transform: none;
 }
 
-#controls {
-    margin-bottom: 20px;
-}
+.card.matched .card-name { display: block; }
+
+#controls { margin-bottom: 20px; }
 
 #restart-btn, #play-again-btn {
     padding: 14px 40px;
@@ -135,7 +135,6 @@ body {
     cursor: pointer;
     transition: all 0.3s;
     box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
-    letter-spacing: 0.5px;
 }
 
 #restart-btn:hover, #play-again-btn:hover {
@@ -143,19 +142,27 @@ body {
     box-shadow: 0 8px 25px rgba(233, 69, 96, 0.4);
 }
 
-#win-message {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(82, 183, 136, 0.4);
-    border-radius: 20px;
-    padding: 35px;
-    max-width: 420px;
-    margin: 25px auto;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+#win-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    backdrop-filter: blur(5px);
 }
 
-#win-message.hidden {
-    display: none;
+#win-overlay.hidden { display: none; }
+
+#win-message {
+    background: rgba(30, 30, 60, 0.95);
+    border: 2px solid rgba(82, 183, 136, 0.4);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 420px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 #win-message h2 {
@@ -168,15 +175,6 @@ body {
     background-clip: text;
 }
 
-#win-details {
-    color: #9999bb;
-    margin-bottom: 18px;
-    font-size: 1.05rem;
-}
+#win-details { color: #9999bb; margin-bottom: 18px; font-size: 1.05rem; }
 
-#game-footer {
-    margin-top: 35px;
-    color: #444466;
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
-}
+#game-footer { margin-top: 35px; color: #444466; font-size: 0.85rem; }

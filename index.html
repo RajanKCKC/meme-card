@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meme Memory Card Game</title>
+    <title>Meme Memory Card Game - Brainrot Edition</title>
     <meta name="description" content="Test your memory with the ultimate brainrot meme matching game!">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header id="game-header">
         <h1 id="game-title">🧠 MEME MEMORY 🧠</h1>
         <p class="subtitle">Brainrot Edition — Match the memes!</p>
@@ -21,7 +21,7 @@
         </div>
         <div class="stat-box">
             <span class="stat-label">MATCHES</span>
-            <span class="stat-value" id="matches">0 / 6</span>
+            <span class="stat-value" id="matches">0 / 8</span>
         </div>
         <div class="stat-box">
             <span class="stat-label">STATUS</span>
@@ -37,14 +37,16 @@
         <button id="restart-btn" type="button">🔄 New Game</button>
     </section>
 
-    <div id="win-message" class="hidden">
-        <h2>🎉 YOU WON! 🎉</h2>
-        <p id="win-details"></p>
-        <button id="play-again-btn" type="button">Play Again</button>
+    <div id="win-overlay" class="hidden">
+        <div id="win-message">
+            <h2>🎉 YOU WON! 🎉</h2>
+            <p id="win-details"></p>
+            <button id="play-again-btn" type="button">🔥 Play Again</button>
+        </div>
     </div>
 
     <footer id="game-footer">
-        <p>💀 Every game has different memes! 💀</p>
+        <p>💀 Different memes every game! 💀</p>
     </footer>
 
     <script src="script.js"></script>
